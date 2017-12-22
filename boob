@@ -2,7 +2,7 @@
 const program = require('commander')
 const child_process = require('child_process');
 program
-    .version('0.0.1')
+    .version('1.0.0')
     .description('创建一个移动端项目')
     .option('-n, --name', '创建项目 现在有 analyst-mobile  | parser-portal | front-component ')
 
