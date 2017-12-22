@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+const program = require('commander')
+const child_process = require('child_process');
+program
+    .version('0.0.1')
+    .description('创建一个移动端项目')
+    .option('-n, --name', '创建项目 现在有 analyst-mobile  | parser-portal | front-component ')
+
+program
+    .command('n <name>')
+    .description('创建一个项目')
+    .action(function (name) {
+        if (name === 'analyst-mobile') {
+            child_process.exec('git clone git@10.12.0.79:huangdonghai/analyst-mobile.git', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`exec error: ${error}`);
+                    return;
+                }
+                console.log(`项目文件下载完毕，请运行 cd `);
+            })
+        }else if(name === 'parser-portal'){
+
+        }else if(name === 'front-component'){
+
+        }else{
+            console.log(`项目名称不对，请运行 create-abcft-app -b 输出所有项目名称`);
+        }
+
+    })
+
+
+program.parse(process.argv)
