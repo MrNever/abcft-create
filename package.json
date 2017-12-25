@@ -1,6 +1,6 @@
 {
   "name": "create-abcft-app",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "create-abcft-app",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "inquirer": "^4.0.1"
   },
   "bin": {
-    "create-abcft-app": "boob"
+    "create-abcft-app": "bin/boob"
   },
   "dependencies": {
     "chalk": "^2.3.0",

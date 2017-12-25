@@ -1,0 +1,65 @@
+#!/usr/bin/env node
+const program = require('commander')
+const child_process = require('child_process');
+program
+    .version('1.0.4')
+    .description('创建一个移动端项目')
+    .option('-n, --name <projectName>', '创建项目 现在有 analyst-mobile  | parser-portal | front-component ')
+    .option('-l, --list', '获取工具现在支持的项目')
+
+program
+    .command('n <name>')
+    .description('创建一个项目 analyst-mobile  | parser-portal | front-component')
+    .action(function (name) {
+        if (name === 'analyst-mobile') {
+            child_process.exec('git clone git@10.12.0.79:huangdonghai/analyst-mobile.git', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`错误: ${error}`);
+                    return;
+                }
+                console.log(`项目文件下载完毕。
+                             请运行 cd analyst-mobile 
+                             npm install
+                             `);
+            })
+        } else if (name === 'parser-portal') {
+            child_process.exec('git clone git@10.12.0.79:parsing/parser-portal.git', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`错误: ${error}`);
+                    return;
+                }
+                console.log(`项目文件下载完毕。
+                             请运行 cd parser-portal 
+                             npm install
+                             `);
+            })
+        } else if (name === 'front-component') {
+            child_process.exec('git clone git@10.12.0.79:parsing/front-component.git', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`错误: ${error}`);
+                    return;
+                }
+                console.log(`项目文件下载完毕。
+                             请运行 cd front-component 
+                             npm install
+                             `);
+            })
+        } else {
+            console.log(`项目名称不对，请运行 create-abcft-app l 输出所有项目名称`);
+        }
+
+    })
+program
+    .command('l')
+    .description('获取现有项目列表')
+    .action(function () {
+        console.log(`
+                搜索移动端：analyst-mobile
+                组件库核心：front-component
+                parseing: parser-portal
+            `)
+        return
+
+    })
+
+program.parse(process.argv)
