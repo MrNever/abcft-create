@@ -1,15 +1,14 @@
 #!/usr/bin/env node
 const program = require('commander')
+const chalk = require('chalk')
 const child_process = require('child_process');
 program
-    .version('1.0.4')
-    .description('创建一个移动端项目')
-    .option('-n, --name <projectName>', '创建项目 现在有 analyst-mobile  | parser-portal | front-component ')
-    .option('-l, --list', '获取工具现在支持的项目')
+    .version('1.0.6')
 
 program
     .command('n <name>')
-    .description('创建一个项目 analyst-mobile  | parser-portal | front-component')
+    .alias('name')
+    .description(chalk.yellow('创建一个项目 analyst-mobile  | parser-portal | front-component'))
     .action(function (name) {
         if (name === 'analyst-mobile') {
             child_process.exec('git clone git@10.12.0.79:huangdonghai/analyst-mobile.git', (error, stdout, stderr) => {
@@ -51,7 +50,8 @@ program
     })
 program
     .command('l')
-    .description('获取现有项目列表')
+    .alias('list')
+    .description(chalk.yellow('获取现有项目列表'))
     .action(function () {
         console.log(`
                 搜索移动端：analyst-mobile
@@ -60,6 +60,48 @@ program
             `)
         return
 
+    })
+program
+    .command('b <pathName>')
+    .alias('base')
+    .option('--github', '是否从github上下载')
+    .description(chalk.yellow('创建一个基础架构，不带任何业务信息'))
+    .action(function (pathName, option) {
+        var path = ``
+        path = option.github ? `https://github.com/zasqw2222/base-front.git` : `git@10.12.0.79:huangdonghai/base-Front.git`
+        child_process.exec(`git clone ${path}`, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`错误: ${error}`);
+                return;
+            }
+            child_process.exec(`mv base-front ${pathName}`, (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`错误: ${error}`);
+                    return;
+                }
+                child_process.exec(`rm -rf ${pathName}/.git/`, (error, stdout, stderr) => {
+                    if (error) {
+                        console.error(`错误: ${error}`);
+                        return;
+                    }
+                    console.log(`项目文件下载完毕。
+                    请运行 cd ${pathName}
+                    处理 git仓库信息，然后 
+                    npm install
+                    `);
+                })
+
+            })
+        })
+    })
+program
+    .command('*')
+    .description(chalk.yellow('捕获错误'))
+    .action(function () {
+        console.log(chalk.magenta(`
+                     输入命令行不正确
+                     输入 create-abcft-app --help、-h
+                     获取帮助`));
     })
 
 program.parse(process.argv)
