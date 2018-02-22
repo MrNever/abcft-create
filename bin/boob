@@ -5,62 +5,62 @@ const child_process = require('child_process');
 program
     .version('1.0.6')
 
-program
-    .command('n <name>')
-    .alias('name')
-    .description(chalk.yellow('创建一个项目 analyst-mobile  | parser-portal | front-component'))
-    .action(function (name) {
-        if (name === 'analyst-mobile') {
-            child_process.exec('git clone git@10.12.0.79:huangdonghai/analyst-mobile.git', (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`错误: ${error}`);
-                    return;
-                }
-                console.log(`项目文件下载完毕。
-                             请运行 cd analyst-mobile 
-                             npm install
-                             `);
-            })
-        } else if (name === 'parser-portal') {
-            child_process.exec('git clone git@10.12.0.79:parsing/parser-portal.git', (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`错误: ${error}`);
-                    return;
-                }
-                console.log(`项目文件下载完毕。
-                             请运行 cd parser-portal 
-                             npm install
-                             `);
-            })
-        } else if (name === 'front-component') {
-            child_process.exec('git clone git@10.12.0.79:parsing/front-component.git', (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`错误: ${error}`);
-                    return;
-                }
-                console.log(`项目文件下载完毕。
-                             请运行 cd front-component 
-                             npm install
-                             `);
-            })
-        } else {
-            console.log(`项目名称不对，请运行 create-abcft-app l 输出所有项目名称`);
-        }
+// program
+//     .command('n <name>')
+//     .alias('name')
+//     .description(chalk.yellow('创建一个项目 analyst-mobile  | parser-portal | front-component'))
+//     .action(function (name) {
+//         if (name === 'analyst-mobile') {
+//             child_process.exec('git clone git@10.12.0.79:huangdonghai/analyst-mobile.git', (error, stdout, stderr) => {
+//                 if (error) {
+//                     console.error(`错误: ${error}`);
+//                     return;
+//                 }
+//                 console.log(`项目文件下载完毕。
+//                              请运行 cd analyst-mobile 
+//                              npm install
+//                              `);
+//             })
+//         } else if (name === 'parser-portal') {
+//             child_process.exec('git clone git@10.12.0.79:parsing/parser-portal.git', (error, stdout, stderr) => {
+//                 if (error) {
+//                     console.error(`错误: ${error}`);
+//                     return;
+//                 }
+//                 console.log(`项目文件下载完毕。
+//                              请运行 cd parser-portal 
+//                              npm install
+//                              `);
+//             })
+//         } else if (name === 'front-component') {
+//             child_process.exec('git clone git@10.12.0.79:parsing/front-component.git', (error, stdout, stderr) => {
+//                 if (error) {
+//                     console.error(`错误: ${error}`);
+//                     return;
+//                 }
+//                 console.log(`项目文件下载完毕。
+//                              请运行 cd front-component 
+//                              npm install
+//                              `);
+//             })
+//         } else {
+//             console.log(`项目名称不对，请运行 create-abcft-app l 输出所有项目名称`);
+//         }
 
-    })
-program
-    .command('l')
-    .alias('list')
-    .description(chalk.yellow('获取现有项目列表'))
-    .action(function () {
-        console.log(`
-                搜索移动端：analyst-mobile
-                组件库核心：front-component
-                parseing: parser-portal
-            `)
-        return
+//     })
+// program
+//     .command('l')
+//     .alias('list')
+//     .description(chalk.yellow('获取现有项目列表'))
+//     .action(function () {
+//         console.log(`
+//                 搜索移动端：analyst-mobile
+//                 组件库核心：front-component
+//                 parseing: parser-portal
+//             `)
+//         return
 
-    })
+//     })
 program
     .command('b <pathName>')
     .alias('base')
@@ -68,7 +68,7 @@ program
     .description(chalk.yellow('创建一个基础架构，不带任何业务信息'))
     .action(function (pathName, option) {
         var path = ``
-        path = option.github ? `https://github.com/zasqw2222/base-front.git` : `git@10.12.0.79:huangdonghai/base-Front.git`
+        path = option.github ? `https://github.com/zasqw2222/base-front.git` : `https://github.com/zasqw2222/base-front.git`
         child_process.exec(`git clone ${path}`, (error, stdout, stderr) => {
             if (error) {
                 console.error(`错误: ${error}`);
