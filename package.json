@@ -1,12 +1,15 @@
 {
   "name": "create-abcft-app",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "create-abcft-app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "create-abcft-app",
+    "abcft"
+  ],
   "author": "zasqwhdh@gmail.com",
   "license": "ISC",
   "devDependencies": {
