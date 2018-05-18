@@ -3,7 +3,7 @@ const program = require('commander')
 const chalk = require('chalk')
 const child_process = require('child_process');
 program
-    .version('1.0.10')
+    .version('1.0.14')
 
 // program
 //     .command('n <name>')
@@ -68,17 +68,17 @@ program
     .description(chalk.yellow('创建一个基础架构，不带任何业务信息'))
     .action(function (pathName, option) {
         var path = ``
-        path = option.github ? `https://github.com/zasqw2222/base-front2.git` : `https://github.com/zasqw2222/base-front2.git`
-        child_process.exec(`git clone ${path}`, (error, stdout, stderr) => {
+        path = option.github ? `https://github.com/zasqw2222/abcftFront.git` : `https://github.com/zasqw2222/abcftFront.git`
+        child_process.exec(`git clone ${path} ${pathName}`, (error, stdout, stderr) => {
             if (error) {
                 console.error(`错误: ${error}`);
                 return;
             }
-            child_process.exec(`mv base-front2 ${pathName}`, (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`错误: ${error}`);
-                    return;
-                }
+            // child_process.exec(`mv base-front2 ${pathName}`, (error, stdout, stderr) => {
+            //     if (error) {
+            //         console.error(`错误: ${error}`);
+            //         return;
+            //     }
                 child_process.exec(`rm -rf ${pathName}/.git/`, (error, stdout, stderr) => {
                     if (error) {
                         console.error(`错误: ${error}`);
@@ -91,7 +91,7 @@ program
                     `);
                 })
 
-            })
+            // })
         })
     })
 program
