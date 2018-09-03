@@ -64,11 +64,11 @@ program
 program
     .command('b <pathName>')
     .alias('base')
-    .option('--github', '是否从github上下载')
+    .option('--p', '创建pack架构')
     .description(chalk.yellow('创建一个基础架构，不带任何业务信息'))
     .action(function (pathName, option) {
         var path = ``
-        path = option.github ? `https://github.com/zasqw2222/abcftFront.git` : `https://github.com/zasqw2222/abcftFront.git`
+        path = option.p ? `https://github.com/zasqw2222/abcFountByPack.git` : `https://github.com/zasqw2222/abcftFront.git`
         child_process.exec(`git clone ${path} ${pathName}`, (error, stdout, stderr) => {
             if (error) {
                 console.error(`错误: ${error}`);
