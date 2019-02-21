@@ -1,6 +1,6 @@
 {
-  "name": "create-abcft-app",
-  "version": "1.0.15",
+  "name": "create-abc-app",
+  "version": "1.0.16",
   "description": "create-abcft-app",
   "main": "index.js",
   "scripts": {
@@ -12,14 +12,15 @@
   ],
   "author": "zasqwhdh@gmail.com",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^2.19.0",
     "download-git-repo": "^1.1.0",
-    "inquirer": "^6.2.2"
+    "inquirer": "^6.2.2",
+    "ora": "^3.1.0",
+    "execa": "^1.0.0"
   },
   "bin": {
-    "create-abcft-app": "bin/boob"
-  },
-  "dependencies": {}
+    "create-abc-app": "bin/boob"
+  }
 }

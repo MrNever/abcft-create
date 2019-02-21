@@ -1,31 +1,56 @@
 #!/usr/bin/env node
-const program = require('commander')
+const commander = require('commander')
 const chalk = require('chalk')
 const download  = require('download-git-repo')
+const ora = require('ora')
+const execa = require('execa')
 const pkg = require('../package.json')
-program.version(pkg.version)
 
-
-program
-  .command('b <pathName>')
-  .alias('base')
-  .option('--p', '创建pack架构')
-  .description(chalk.yellow('创建一个基础架构，不带任何业务信息, --p 创建组件脚手架'))
+const program = new commander.Command(pkg.name)
+  .version(pkg.version)
+  .usage(`${chalk.green('<project-directory>')} [options]`)
+  .description(chalk.yellow('创建一个基础架构，不带任何业务信息, -p 创建组件脚手架'))
+  .arguments('<project-directory>')
+  .option('-p, --package', '创建组件架构')
   .action(function (pathName, option) {
-    const path = option.p ? `direct:https://github.com/zasqw2222/abcFountByPack#rollup` : `direct:https://github.com/zasqw2222/abcftFront.git`
-    download(path, pathName, { clone: true }, function (err) {
+    const path = option.package ? `direct:https://github.com/zasqw2222/abcFountByPack#rollup` : `direct:https://github.com/zasqw2222/abcftFront.git`
+    const spinner = ora('正在下载模版').start()
+    download(path, pathName, { clone: true }, async function (err) {
       if (err) {
         console.error(`错误: ${err}`)
       } else {
-        console.log(`项目文件下载完毕。请运行 cd ${pathName} 处理git仓库信息，然后npm install`)
+        spinner.succeed('模版下载完成')
+        spinner.start('安装依赖')
+        await execa(`git`, ['init'], { cwd: pathName })
+        await execa('npm', ['install'], { cwd: pathName })
+        spinner.succeed('依赖安装完成')
+        spinner.stop()
+        console.log(chalk.yellow('开始开发吧！'))
       }
     })
   })
-program
-  .command('*')
-  .description(chalk.yellow('捕获错误'))
-  .action(function () {
-    console.log(chalk.magenta(`输入命令行不正确,输入 create-abcft-app --help、-h获取帮助`))
+  .on('--help', () => {
+    console.log()
+    console.log(`    仅需要提供 ${chalk.green('<project-directory>')} 参数`)
+    console.log()
+    console.log(`    当不带 ${chalk.green('-p')} 选项的时候，创建项目脚手架`)
+    console.log()
+    console.log(`    当带 ${chalk.green('-p')} 选项的时候，创建组件脚手架`)
+    console.log()
+    console.log(`    脚手架自动初始化git仓库以及安装依赖，不需要额外操作`)
+    console.log()
+    console.log(`    创建项目示例：${chalk.yellow('create-abc-app')} ${chalk.green('test-project')}`)
+    console.log()
+    console.log(`    创建组件示例：${chalk.yellow('create-abc-app')} ${chalk.green('-p test-component')}`)
+    console.log()
+    console.log(`    有任何问题请联系: ${chalk.green('ddxia@abcft.com')}`)
   })
+  
+// program
+//   .command('*')
+//   .description(chalk.yellow('捕获错误'))
+//   .action(function () {
+//     console.log(chalk.magenta(`输入命令行不正确,输入 create-abcft-app --help、-h获取帮助`))
+//   })
 
 program.parse(process.argv)
