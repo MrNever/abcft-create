@@ -46,11 +46,4 @@ const program = new commander.Command(pkg.name)
     console.log(`    有任何问题请联系: ${chalk.green('ddxia@abcft.com')}`)
   })
   
-// program
-//   .command('*')
-//   .description(chalk.yellow('捕获错误'))
-//   .action(function () {
-//     console.log(chalk.magenta(`输入命令行不正确,输入 create-abcft-app --help、-h获取帮助`))
-//   })
-
 program.parse(process.argv)
