@@ -13,16 +13,13 @@
   "author": "zasqwhdh@gmail.com",
   "license": "ISC",
   "devDependencies": {
-    "chalk": "^2.3.0",
-    "commander": "^2.12.2",
-    "inquirer": "^4.0.1"
+    "chalk": "^2.4.2",
+    "commander": "^2.19.0",
+    "download-git-repo": "^1.1.0",
+    "inquirer": "^6.2.2"
   },
   "bin": {
     "create-abcft-app": "bin/boob"
   },
-  "dependencies": {
-    "chalk": "^2.3.0",
-    "commander": "^2.12.2",
-    "inquirer": "^4.0.1"
-  }
+  "dependencies": {}
 }
