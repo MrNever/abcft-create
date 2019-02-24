@@ -12,8 +12,13 @@ const program = new commander.Command(pkg.name)
   .description(chalk.yellow('创建一个基础架构，不带任何业务信息, -p 创建组件脚手架'))
   .arguments('<project-directory>')
   .option('-p, --package', '创建组件架构')
+  .option('-s, --ssr', 'nextjs服务端渲染架构')
   .action(function (pathName, option) {
-    const path = option.package ? `direct:https://github.com/zasqw2222/abcFountByPack#rollup` : `direct:https://github.com/zasqw2222/abcftFront.git`
+    console.log(option.ssr)
+    let path = 'direct:https://github.com/zasqw2222/abcftFront'
+    if (option.package) path = 'direct:https://github.com/zasqw2222/abcFountByPack#rollup'
+    if (option.ssr) path = 'direct:https://github.com/zasqw2222/abcftFront#next'
+    console.log(path)
     const spinner = ora('正在下载模版').start()
     download(path, pathName, { clone: true }, async function (err) {
       if (err) {
@@ -36,6 +41,8 @@ const program = new commander.Command(pkg.name)
     console.log(`    当不带 ${chalk.green('-p')} 选项的时候，创建项目脚手架`)
     console.log()
     console.log(`    当带 ${chalk.green('-p')} 选项的时候，创建组件脚手架`)
+    console.log()
+    console.log(`    当带 ${chalk.green('-s')} 选项的时候，创建ssr项目脚手架`)
     console.log()
     console.log(`    脚手架自动初始化git仓库以及安装依赖，不需要额外操作`)
     console.log()
