@@ -9,16 +9,14 @@ const pkg = require('../package.json')
 const program = new commander.Command(pkg.name)
   .version(pkg.version)
   .usage(`${chalk.green('<project-directory>')} [options]`)
-  .description(chalk.yellow('创建一个基础架构，不带任何业务信息, -p 创建组件脚手架'))
+  .description(chalk.yellow('创建一个基础架构，不带任何业务信息, \n-p 创建组件脚手架 \n-s 创建ssr项目'))
   .arguments('<project-directory>')
   .option('-p, --package', '创建组件架构')
   .option('-s, --ssr', 'nextjs服务端渲染架构')
   .action(function (pathName, option) {
-    console.log(option.ssr)
     let path = 'direct:https://github.com/zasqw2222/abcftFront'
     if (option.package) path = 'direct:https://github.com/zasqw2222/abcFountByPack#rollup'
     if (option.ssr) path = 'direct:https://github.com/zasqw2222/abcftFront#next'
-    console.log(path)
     const spinner = ora('正在下载模版').start()
     download(path, pathName, { clone: true }, async function (err) {
       if (err) {
@@ -49,6 +47,8 @@ const program = new commander.Command(pkg.name)
     console.log(`    创建项目示例：${chalk.yellow('create-abc-app')} ${chalk.green('test-project')}`)
     console.log()
     console.log(`    创建组件示例：${chalk.yellow('create-abc-app')} ${chalk.green('-p test-component')}`)
+    console.log()
+    console.log(`    创建ssr项目示例：${chalk.yellow('create-abc-app')} ${chalk.green('-s ssr-component')}`)
     console.log()
     console.log(`    有任何问题请联系: ${chalk.green('ddxia@abcft.com')}`)
   })
