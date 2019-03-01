@@ -12,9 +12,9 @@ const program = new commander.Command(pkg.name)
   .description(chalk.yellow('创建一个基础架构，不带任何业务信息, \n-p 创建组件脚手架 \n-s 创建ssr项目'))
   .arguments('<project-directory>')
   .option('-p, --package', '创建组件架构')
-  .option('-s, --ssr', 'nextjs服务端渲染架构')
+  .option('-s, --ssr', 'nextjs服务端渲染架构，外部项目请谨慎使用')
   .action(function (pathName, option) {
-    let path = 'direct:https://github.com/zasqw2222/abcftFront'
+    let path = 'direct:https://github.com/zasqw2222/abcftFront#caa'
     if (option.package) path = 'direct:https://github.com/zasqw2222/abcFountByPack#rollup'
     if (option.ssr) path = 'direct:https://github.com/zasqw2222/abcftFront#next'
     const spinner = ora('正在下载模版').start()
@@ -28,7 +28,7 @@ const program = new commander.Command(pkg.name)
         await execa('npm', ['install'], { cwd: pathName })
         spinner.succeed('依赖安装完成')
         spinner.stop()
-        console.log(chalk.yellow('开始开发吧！'))
+        console.log(chalk.yellow(`进入项目，执行${chalk.green('npm start')}，开始开发吧！`))
       }
     })
   })
@@ -48,7 +48,7 @@ const program = new commander.Command(pkg.name)
     console.log()
     console.log(`    创建组件示例：${chalk.yellow('create-abc-app')} ${chalk.green('-p test-component')}`)
     console.log()
-    console.log(`    创建ssr项目示例：${chalk.yellow('create-abc-app')} ${chalk.green('-s ssr-component')}`)
+    console.log(`    创建ssr项目示例：${chalk.yellow('create-abc-app')} ${chalk.green('-s ssr-project')}`)
     console.log()
     console.log(`    有任何问题请联系: ${chalk.green('ddxia@abcft.com')}`)
   })
