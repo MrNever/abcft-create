@@ -14,9 +14,9 @@ const program = new commander.Command(pkg.name)
   .option('-p, --package', '创建组件架构')
   .option('-s, --ssr', 'nextjs服务端渲染架构，外部项目请谨慎使用')
   .action(function (pathName, option) {
-    let path = 'direct:https://github.com/zasqw2222/abcftFront#caa'
-    if (option.package) path = 'direct:https://github.com/zasqw2222/abcFountByPack#rollup'
-    if (option.ssr) path = 'direct:https://github.com/zasqw2222/abcftFront#next'
+    let path = 'direct:http://gitlab.niub.la/ddxia.abcft/abc-react-app#caa'
+    if (option.package) path = 'direct:http://gitlab.niub.la/ddxia.abcft/abc-component-app#rollup'
+    if (option.ssr) path = 'direct:http://gitlab.niub.la/ddxia.abcft/abc-next-app#next'
     const spinner = ora('正在下载模版').start()
     download(path, pathName, { clone: true }, async function (err) {
       if (err) {
