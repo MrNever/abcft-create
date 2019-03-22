@@ -4,13 +4,15 @@ const chalk = require('chalk')
 const download  = require('download-git-repo')
 const ora = require('ora')
 const execa = require('execa')
-const pkg = require('../package.json')
+const inquirer = require('inquirer')
+
+var prompt = inquirer.createPromptModule()
 
 program
   .usage('<appName> [options]')
   .option('-p, --package', '创建组件架构')
   .option('-s, --ssr', 'nextjs服务端渲染架构，外部项目请谨慎使用')
-  .action(function (pathName, option) {
+  .action(async function (pathName, option) {
     let path = 'direct:http://10.15.0.79/ddxia.abcft/abc-react-app#caa'
     if (option.package) path = 'direct:http://10.15.0.79/ddxia.abcft/abc-component-app#rollup'
     if (option.ssr) path = 'direct:http://10.15.0.79/ddxia.abcft/abc-next-app#next'
