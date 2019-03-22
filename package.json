@@ -16,9 +16,12 @@
     "chalk": "^2.4.2",
     "commander": "^2.19.0",
     "download-git-repo": "^1.1.0",
+    "execa": "^1.0.0",
+    "import-jsx": "^1.3.0",
+    "ink": "^2.0.3",
     "inquirer": "^6.2.2",
     "ora": "^3.1.0",
-    "execa": "^1.0.0"
+    "react": "^16.8.4"
   },
   "bin": {
     "create-abc-app": "bin/boob"
