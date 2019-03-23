@@ -20,9 +20,13 @@ program
   .command('config', '配置用户信息')
   .command('info', '展示用户信息')
   .action(async () => {
-    const update = await checkForUpdate(pkg)
-    if (update) {
-      console.log('脚手架工具有新版本更新，执行 apd update 升级')
+    try {
+      const update = await checkForUpdate(pkg)
+      if (update) {
+        console.log('脚手架工具有新版本更新，执行 apd update 升级')
+      }
+    } catch (err) {
+      console.error(err)
     }
   })
   .parse(process.argv)
