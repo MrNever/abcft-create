@@ -12,9 +12,18 @@ const questions = [
     name: 'theme',
     message: '你想要创建哪种类型的项目？',
     choices: [
-      '项目',
-      'ssr项目',
-      '组件'
+      {
+        name: '一个完整的react应用',
+        value: 'project'
+      },
+      {
+        name: '一个完整的react ssr应用',
+        value: 'ssr_project'
+      },
+      {
+        name: '一个最基础的组件starter',
+        value: 'component'
+      },
     ]
   },
   {
