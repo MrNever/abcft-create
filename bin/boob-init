@@ -6,13 +6,31 @@ const ora = require('ora')
 const execa = require('execa')
 const inquirer = require('inquirer')
 
-var prompt = inquirer.createPromptModule()
+const questions = [
+  {
+    type: 'list',
+    name: 'theme',
+    message: '你想要创建哪种类型的项目？',
+    choices: [
+      '项目',
+      'ssr项目',
+      '组件'
+    ]
+  },
+  {
+    type: 'input',
+    name: 'first_name',
+    message: "项目名称是什么？"
+  },
+]
 
 program
   .usage('<appName> [options]')
   .option('-p, --package', '创建组件架构')
   .option('-s, --ssr', 'nextjs服务端渲染架构，外部项目请谨慎使用')
   .action(async function (pathName, option) {
+    const answers = await inquirer.prompt(questions)
+    console.log(answers)
     let path = 'direct:http://10.15.0.79/ddxia.abcft/abc-react-app#caa'
     if (option.package) path = 'direct:http://10.15.0.79/ddxia.abcft/abc-component-app#rollup'
     if (option.ssr) path = 'direct:http://10.15.0.79/ddxia.abcft/abc-next-app#next'
