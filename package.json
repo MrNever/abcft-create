@@ -26,6 +26,6 @@
     "update-check": "^1.5.3"
   },
   "bin": {
-    "create-abc-app": "bin/boob"
+    "pak": "bin/boob"
   }
 }
