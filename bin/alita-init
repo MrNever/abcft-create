@@ -64,13 +64,7 @@ program
       console.log('用户未登陆')
       return 
     }
-    report({
-      username: user.sAMAccountName,
-      name: user.name,
-      action_type: 'create',
-      datetime: Date.now(),
-      info: answers.name
-    })
+    
     download(path, answers.name, { clone: true }, async function (err) {
       if (err) {
         console.error(`错误: ${err}`)
@@ -82,6 +76,14 @@ program
         spinner.succeed('依赖安装完成')
         spinner.stop()
         console.log(chalk.yellow(`进入项目，执行${chalk.green('npm start')}，开始开发吧！`))
+        report({
+          username: user.sAMAccountName,
+          name: user.name,
+          type: answers.type,
+          action_type: 'create',
+          datetime: Date.now(),
+          info: answers.name
+        })
       }
     })
   })

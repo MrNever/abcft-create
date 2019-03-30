@@ -41,6 +41,11 @@ exports.getUserinfo = function getUserinfo () {
 }
 
 exports.report = async function report (data) {
-  console.log(data)
-  axios.post('https://wdcp.analyst.ai/report', data)
+  try {
+    await axios.post('https://wdcp.analyst.ai/api/v1/action/log', data)
+    console.log('上传成功')
+  } catch (err) {
+    console.log(err)
+    console.log('发生了一个错误')
+  }
 }
