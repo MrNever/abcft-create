@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+const program = require('commander')
+const fs = require('fs')
+const path = require('path')
+
+const pathname = path.resolve(__dirname, '../.user')
+
+program
+  .action(() => {
+    if (!fs.existsSync(pathname)) {
+      console.log('用户未登录')
+      return
+    }
+    fs.unlinkSync(pathname)
+    console.log('退出登陆成功')
+  })
+  .parse(process.argv)

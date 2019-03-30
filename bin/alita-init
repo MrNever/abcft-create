@@ -5,6 +5,9 @@ const download  = require('download-git-repo')
 const ora = require('ora')
 const execa = require('execa')
 const inquirer = require('inquirer')
+const fs = require('fs')
+const path = require('path')
+const pathname = path.resolve(__dirname, '../.user')
 
 const questions = [
   {
@@ -38,6 +41,10 @@ program
   .option('-p, --package', '创建组件架构')
   .option('-s, --ssr', 'nextjs服务端渲染架构，外部项目请谨慎使用')
   .action(async function (pathName, option) {
+    if (!fs.existsSync(pathname)) {
+      console.log('请先去登陆')
+      return
+    }
     const answers = await inquirer.prompt(questions)
     let path = void 0
     switch (answers.type) {

@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+const program = require('commander')
+const figlet = require('figlet')
+const checkForUpdate = require('update-check')
+const pkg = require('../package.json')
+
+program
+  .version(pkg.version)
+  .description(figlet.textSync('WELCOME TO ABCFE', {
+    horizontalLayout: 'default',
+    verticalLayout: 'default'
+  }))
+  .usage(`[command] [options]`)
+  // .action(() => {
+  //   login('ddxia.abcft', 'epW6cUPKZGOuYSyJEtZ').then(user => console.log(user))
+  // })
+  .command('init', '初始化项目')
+  .command('login', '用户登陆')
+  .command('logout', '用户退出')
+  .command('info', '展示用户信息')
+  .parse(process.argv)

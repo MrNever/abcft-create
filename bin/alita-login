@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+const program = require('commander')
+const inquirer = require('inquirer')
+const fs = require('fs')
+const path = require('path')
+const chalk = require('chalk')
+const { login } = require('../src/util')
+
+program
+  .usage('<appName> [options]')
+  .option('--username [username]', '用户名')
+  .option('--password [password],', '密码')
+  .parse(process.argv)
+
+;(async function () {
+  const { username, password } = program
+  const questions = []
+  const loginInfo = {
+    username, password
+  }
+
+  if (!username) {
+    questions.push({
+      type: 'input',
+      name: 'username',
+      message: '请输入用户名'
+    })
+  }
+
+  if (!password) {
+    questions.push({
+      type: 'password',
+      name: 'password',
+      message: '请输入密码'
+    })
+  }
+  const answers = await inquirer.prompt(questions)
+  for (let key in answers) {
+    loginInfo[key] = answers[key]
+  }
+  try {
+    const userinfo = await login(loginInfo.username, loginInfo.password)
+    const pathname = path.resolve(__dirname, '../.user')
+    if (fs.existsSync(pathname)) {
+      fs.unlinkSync(pathname)
+    }
+    fs.writeFileSync(pathname, JSON.stringify(userinfo))
+    console.log(`${chalk.green('登陆成功！')}`)
+    process.exit(-1)
+  } catch (err) {
+    console.log(err)
+  }
+})()

@@ -1,6 +1,0 @@
-#!/usr/bin/env node
-const program = require('commander')
-
-program
-  .usage('配置用户信息')
-  .parse(process.argv)

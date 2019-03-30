@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+const program = require('commander')
+const fs = require('fs')
+const path = require('path')
+const pathname = path.resolve(__dirname, '../.user')
+
+program
+  .description('用户退出登陆，直接执行即可')
+  .action(() => {
+    if (!fs.existsSync(pathname)) {
+      console.log('用户未登录')
+      return
+    }
+    const user = JSON.parse(fs.readFileSync(pathname))
+    console.log(`用户名： ${user.cn}`)
+    console.log(`邮箱： ${user.mail}`)
+  })
+  .parse(process.argv)
