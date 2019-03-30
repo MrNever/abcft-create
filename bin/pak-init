@@ -9,7 +9,7 @@ const inquirer = require('inquirer')
 const questions = [
   {
     type: 'list',
-    name: 'theme',
+    name: 'type',
     message: '你想要创建哪种类型的项目？',
     choices: [
       {
@@ -28,7 +28,7 @@ const questions = [
   },
   {
     type: 'input',
-    name: 'first_name',
+    name: 'name',
     message: "项目名称是什么？"
   },
 ]
@@ -39,19 +39,26 @@ program
   .option('-s, --ssr', 'nextjs服务端渲染架构，外部项目请谨慎使用')
   .action(async function (pathName, option) {
     const answers = await inquirer.prompt(questions)
-    console.log(answers)
-    let path = 'direct:http://10.15.0.79/ddxia.abcft/abc-react-app#caa'
-    if (option.package) path = 'direct:http://10.15.0.79/ddxia.abcft/abc-component-app#rollup'
-    if (option.ssr) path = 'direct:http://10.15.0.79/ddxia.abcft/abc-next-app#next'
+    let path = void 0
+    switch (answers.type) {
+      case 'ssr_project':
+        path = 'direct:http://10.15.0.79/ddxia.abcft/abc-next-app#next'
+        break;
+      case 'component':
+        path = 'direct:http://10.15.0.79/ddxia.abcft/abc-component-app'
+        break
+      default:
+        path = 'direct:http://10.15.0.79/ddxia.abcft/abc-react-app#caa'
+    }
     const spinner = ora('正在下载模版').start()
-    download(path, pathName, { clone: true }, async function (err) {
+    download(path, answers.name, { clone: true }, async function (err) {
       if (err) {
         console.error(`错误: ${err}`)
       } else {
         spinner.succeed('模版下载完成')
         spinner.start('安装依赖')
-        await execa(`git`, ['init'], { cwd: pathName })
-        await execa('npm', ['install'], { cwd: pathName })
+        await execa(`git`, ['init'], { cwd: answers.name })
+        await execa('npm', ['install'], { cwd: answers.name })
         spinner.succeed('依赖安装完成')
         spinner.stop()
         console.log(chalk.yellow(`进入项目，执行${chalk.green('npm start')}，开始开发吧！`))
