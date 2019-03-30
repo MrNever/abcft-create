@@ -6,6 +6,7 @@ const ora = require('ora')
 const execa = require('execa')
 const inquirer = require('inquirer')
 const fs = require('fs')
+const { report, getUserinfo } = require('../src/util')
 const path = require('path')
 const pathname = path.resolve(__dirname, '../.user')
 
@@ -58,6 +59,18 @@ program
         path = 'direct:http://10.15.0.79/ddxia.abcft/abc-react-app#caa'
     }
     const spinner = ora('正在下载模版').start()
+    const user = getUserinfo()
+    if (!user) {
+      console.log('用户未登陆')
+      return 
+    }
+    report({
+      username: user.sAMAccountName,
+      name: user.name,
+      action_type: 'create',
+      datetime: Date.now(),
+      info: answers.name
+    })
     download(path, answers.name, { clone: true }, async function (err) {
       if (err) {
         console.error(`错误: ${err}`)
