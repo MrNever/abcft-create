@@ -6,7 +6,7 @@ const pkg = require('../package.json')
 
 program
   .version(pkg.version)
-  .description(figlet.textSync('WELCOME TO ABCFE', {
+  .description(figlet.textSync('ALITA', {
     horizontalLayout: 'default',
     verticalLayout: 'default'
   }))
