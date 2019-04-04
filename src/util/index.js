@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const pathname = path.resolve(__dirname, '../../.user')
 
-exports.checkLogin = function checkLogin () {
+function checkLogin () {
   if (!fs.existsSync(pathname)) {
     console.log('用户未登录')
     return false
