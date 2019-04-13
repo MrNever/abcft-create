@@ -2,6 +2,7 @@
 const program = require('commander')
 const chalk = require('chalk')
 const download  = require('download-git-repo')
+const nunjucks = require('nunjucks')
 const ora = require('ora')
 const execa = require('execa')
 const inquirer = require('inquirer')
@@ -70,6 +71,9 @@ program
         console.error(`错误: ${err}`)
       } else {
         spinner.succeed('模版下载完成')
+        const rawPkgString = fs.readFileSync(`${answers.name}/package.json`).toString()
+        const compliedPkgString = nunjucks.renderString(rawPkgString, { project_name: answers.name, author_name: user.name })
+        fs.writeFileSync(`${answers.name}/package.json`, compliedPkgString)
         spinner.start('安装依赖')
         await execa(`git`, ['init'], { cwd: answers.name })
         await execa('npm', ['install'], { cwd: answers.name })
