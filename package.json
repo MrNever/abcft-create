@@ -1,6 +1,6 @@
 {
   "name": "create-abc-app",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "create-abcft-app",
   "main": "index.js",
   "scripts": {

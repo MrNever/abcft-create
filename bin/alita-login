@@ -40,6 +40,7 @@ program
   }
   try {
     const userinfo = await login(loginInfo.username, loginInfo.password)
+    console.log(userinfo)
     const pathname = path.resolve(__dirname, '../.user')
     if (fs.existsSync(pathname)) {
       fs.unlinkSync(pathname)

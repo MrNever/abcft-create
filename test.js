@@ -11,7 +11,6 @@ var opts = {
 }
 
 client.bind('cn=aop,cn=Users,dc=niub,dc=la', 'P@55word', function (err, res1) {
-
 	if (err) {
 		console.log(err)
 		return

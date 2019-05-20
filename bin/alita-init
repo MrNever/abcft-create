@@ -43,10 +43,10 @@ program
   .option('-p, --package', '创建组件架构')
   .option('-s, --ssr', 'nextjs服务端渲染架构，外部项目请谨慎使用')
   .action(async function (pathName, option) {
-    if (!fs.existsSync(pathname)) {
-      console.log('请先去登陆')
-      return
-    }
+    // if (!fs.existsSync(pathname)) {
+    //   console.log('请先去登陆')
+    //   return
+    // }
     const answers = await inquirer.prompt(questions)
     let path = void 0
     switch (answers.type) {
@@ -60,34 +60,34 @@ program
         path = 'direct:http://10.15.0.79/ddxia.abcft/abc-react-app#caa'
     }
     const spinner = ora('正在下载模版').start()
-    const user = getUserinfo()
-    if (!user) {
-      console.log('用户未登陆')
-      return 
-    }
+    // const user = getUserinfo()
+    // if (!user) {
+    //   console.log('用户未登陆')
+    //   return 
+    // }
     
     download(path, answers.name, { clone: true }, async function (err) {
       if (err) {
         console.error(`错误: ${err}`)
       } else {
         spinner.succeed('模版下载完成')
-        const rawPkgString = fs.readFileSync(`${answers.name}/package.json`).toString()
-        const compliedPkgString = nunjucks.renderString(rawPkgString, { project_name: answers.name, author_name: user.name })
-        fs.writeFileSync(`${answers.name}/package.json`, compliedPkgString)
+        // const rawPkgString = fs.readFileSync(`${answers.name}/package.json`).toString()
+        // const compliedPkgString = nunjucks.renderString(rawPkgString, { project_name: answers.name, author_name: user.name })
+        // fs.writeFileSync(`${answers.name}/package.json`, compliedPkgString)
         spinner.start('安装依赖')
         await execa(`git`, ['init'], { cwd: answers.name })
         await execa('npm', ['install'], { cwd: answers.name })
         spinner.succeed('依赖安装完成')
         spinner.stop()
         console.log(chalk.yellow(`进入项目，执行${chalk.green('npm start')}，开始开发吧！`))
-        report({
-          username: user.sAMAccountName,
-          name: user.name,
-          type: answers.type,
-          action_type: 'create',
-          datetime: Date.now(),
-          info: answers.name
-        })
+        // report({
+        //   username: user.sAMAccountName,
+        //   name: user.name,
+        //   type: answers.type,
+        //   action_type: 'create',
+        //   datetime: Date.now(),
+        //   info: answers.name
+        // })
       }
     })
   })

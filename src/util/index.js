@@ -21,14 +21,20 @@ exports.login = async function login (username, password) {
     searchBase: 'dc=niub,dc=la',
     searchFilter: '(sAMAccountName={{username}})',
     reconnect: true,
-    timeout: 6000,
+    timeout: 6000
   }
   const ldap = new LdapAuth(LdapConfig)
+  ldap.on('connect', function (err) {
+    console.error('LdapAuth: ', err);
+  })
   return new Promise((resolve, reject) => {
-    ldap.authenticate(username, password, (err, user) => {
+    ldap.authenticate('ddxia.abcft', 'epW6cUPKZGOuYSyJEtZ', (err, user) => {
+      console.log(111)
       if (err) {
+        console.log(err)
         reject(err)
       } else {
+        console.log(user)
         resolve(user)
       }
     })
